@@ -3,40 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Analyst Portfolio</title>
+    <title>Fahed Sbeihi - Data Analyst Portfolio</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; }
-        header { text-align: center; padding: 1rem; background: #f4f4f4; }
-        section { margin: 2rem 0; padding: 1rem; border: 1px solid #ccc; }
-        #about, #projects, #skills, #contact { max-width: 800px; margin: auto; }
-        h1, h2 { color: #333; }
-        footer { text-align: center; padding: 1rem; background: #f4f4f4; }
-    </style>
 </head>
 <body>
     <header>
-        <h1>My Data Analyst Portfolio</h1>
+        <div class="profile-container">
+            <img src="profile.jpg" alt="Fahed Sbeihi" class="profile-pic">
+        </div>
+        <h1>Fahed Sbeihi</h1>
+        <h2>Data Analyst</h2>
+        <p>2 Years of Experience in Data Analysis & Business Intelligence</p>
     </header>
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Detail your background, experience, and passion for data analysis.</p>
-    </section>
-    <section id="projects">
-        <h2>Projects</h2>
-        <p>Highlight your significant projects, with links to repositories or demos.</p>
-    </section>
-    <section id="skills">
-        <h2>Skills</h2>
-        <p>List your key skills related to data analysis, such as SQL, Python, and data visualization.</p>
-    </section>
-    <section id="contact">
-        <h2>Contact Information</h2>
-        <p>Email: your_email@example.com</p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/yourprofile">linkedin.com/in/yourprofile</a></p>
-    </section>
+    
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Analytical and detail-oriented Business & Data Analyst with experience in data analysis, business reporting, KPI tracking, and forecasting within data-driven environments. Skilled in analyzing complex, multi-source datasets and translating business needs into actionable insights that support strategic and operational decision-making. Proficient in Power BI, Excel, SQL, and workflow automation to build automated dashboards, performance reports, and analytical models that improve visibility and operational efficiency. Experienced in stakeholder collaboration, requirements analysis, and performance monitoring across Sales, Marketing, Finance, Technology, and Consulting teams. Passionate about leveraging data analytics and business intelligence to drive measurable impact and deliver value in fast-paced, data-driven organizations.</p>
+        </section>
+
+        <section id="projects">
+            <h2>Featured Projects</h2>
+            
+            <div class="project-card">
+                <h3>Audit Risk and Compliance Performance Dashboard</h3>
+                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint, DAX, N8n Automation, Orange Data Mining</p>
+                <p>Graduation project designed to transform raw audit data into actionable insights. Covers audit effectiveness, AI adoption, risk scores, high-risk case identification by firm, client satisfaction trends, compliance violations by industry, and operational KPIs. Demonstrates advanced data modeling, KPI-driven design, and practical insights for risk management and compliance monitoring in Big 4 audit environments.</p>
+                <a href="https://lnkd.in/gAPFhgSt" target="_blank">View Interactive Dashboard</a>
+            </div>
+
+            <div class="project-card">
+                <h3>HR Employee Performance Dashboard</h3>
+                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
+                <p>Interactive dashboard designed to deliver key insights into workforce trends, training effectiveness, and employee demographics. Delivers actionable HR insights including workforce overview, gender distribution, promotion and retrenchment readiness, job satisfaction and performance ratings, experience analysis, and distance-from-office metrics. Supports data-driven HR decision-making with clear action and detail views.</p>
+                <a href="https://lnkd.in/dinU6Csn" target="_blank">View Interactive Dashboard</a>
+            </div>
+
+            <div class="project-card">
+                <h3>HR Data Analysis Dashboard</h3>
+                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
+                <p>Analyzes key HR metrics including gender distribution across the organization, average monthly salary range by pay zones, department-wise employee distribution, and employee type classification. Demonstrates practical skills in data modeling, visualization, and translating raw HR data into meaningful business insights for strategic HR planning.</p>
+                <a href="#" target="_blank">View Dashboard</a>
+            </div>
+
+            <div class="project-card">
+                <h3>HR Statistical Analysis Dashboard</h3>
+                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
+                <p>Provides comprehensive workforce analytics with focus on statistical trends, employee demographics, performance metrics, and departmental insights. Enables HR teams to identify patterns in workforce composition and support strategic workforce planning and resource allocation.</p>
+                <a href="#" target="_blank">View Dashboard</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Loan Portfolio Analysis Dashboard</h3>
+                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
+                <p>Consolidates customer demographics, financial profiles, and lending performance into comprehensive analytical view. Analyzes loan default patterns, customer distribution across states, balance analysis, and employment classification trends across 3,994 clients. Provides 360-degree view of portfolio composition and risk distribution to support portfolio optimization, credit risk management, and customer segmentation strategies.</p>
+                <a href="https://lnkd.in/d2RtkDsb" target="_blank">View Interactive Dashboard</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Financial Analytics Dashboard</h3>
+                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
+                <p>Consolidates customer, card, and transaction data into comprehensive analytical view. Highlights key performance indicators including client growth trends, card type distribution, median credit limits, and technology adoption through chip-enabled cards. Provides 360-degree view of client behavior and financial health to drive growth, manage risk, and identify expansion opportunities.</p>
+                <a href="#" target="_blank">View Dashboard</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Open University Students Performance Dashboard</h3>
+                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
+                <p>Built on real-world Kaggle data, visualizes student performance across modules, assessment types, and presentation periods. Identifies peak engagement periods in 2014B presentation cycle, assessment distribution patterns with CMA as first assessment type, and module-specific trends. Supports academic planning and performance analysis through data-driven insights.</p>
+                <a href="#" target="_blank">View Dashboard</a>
+            </div>
+
+            <div class="project-card">
+                <h3>USA Transaction Dashboard</h3>
+                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
+                <p>Fully interactive dashboard visualizing transactional data across the United States. Displays 70 unique destination states, 91 total units sold, 286K+ customers, and 604K in total sales revenue. Focuses on sales performance, customer behavior, channel comparison, and regional reach to enable data-driven business decisions and identify growth opportunities.</p>
+                <a href="#" target="_blank">View Dashboard</a>
+            </div>
+
+            <div class="project-card">
+                <h3>Walmart Sales Statistics</h3>
+                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
+                <p>Comprehensive analysis of Walmart sales data across regions and product categories. Identifies sales patterns, performance trends, and operational efficiency metrics to support strategic business decisions and optimize sales performance across retail channels.</p>
+                <a href="#" target="_blank">View Dashboard</a>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Skills & Tools</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Data Visualization</h3>
+                    <span class="skill">Power BI</span>
+                </div>
+                <div class="skill-category">
+                    <h3>Data Analysis & Reporting</h3>
+                    <span class="skill">Advanced Excel</span>
+                    <span class="skill">SQL</span>
+                    <span class="skill">DAX</span>
+                </div>
+                <div class="skill-category">
+                    <h3>Automation & Integration</h3>
+                    <span class="skill">Power Automate</span>
+                    <span class="skill">Power Query</span>
+                </div>
+                <div class="skill-category">
+                    <h3>Business Tools</h3>
+                    <span class="skill">Salesforce</span>
+                    <span class="skill">PowerPoint</span>
+                </div>
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <span class="skill">Python</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <p>I'm always interested in new opportunities and collaborations in data analytics and business intelligence.</p>
+            <p><strong>Email:</strong> fahed_03@outlook.sa</p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/Fahed03" target="_blank">github.com/Fahed03</a></p>
+            <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/fahed-sbeihi" target="_blank">linkedin.com/in/fahed-sbeihi</a></p>
+        </section>
+    </main>
+
     <footer>
-        <p>&copy; 2026 Fahed03</p>
+        <p>&copy; 2026 Fahed Sbeihi. All rights reserved.</p>
     </footer>
 </body>
 </html>
