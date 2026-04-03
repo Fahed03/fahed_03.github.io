@@ -1,144 +1,1316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fahed Sbeihi - Data Analyst Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fahed Sbeihi — Data & Business Intelligence Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #112240;
+    --navy-light: #1a3560;
+    --gold: #c9a84c;
+    --gold-light: #e2c27a;
+    --white: #f5f7fa;
+    --white-dim: #c8d0e0;
+    --blue-accent: #4a9eda;
+    --border: rgba(201,168,76,0.2);
+    --card-bg: rgba(17,34,64,0.7);
+  }
+ 
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+ 
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+ 
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,22,40,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+ 
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+    text-decoration: none;
+  }
+ 
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+ 
+  .nav-links a {
+    color: var(--white-dim);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+ 
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+ 
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+ 
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+    gap: 4rem;
+  }
+ 
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(74,158,218,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+ 
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+ 
+  .hero-content { position: relative; z-index: 2; }
+ 
+  .hero-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: rgba(201,168,76,0.05);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+ 
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+ 
+  .hero h1 span { color: var(--gold); }
+ 
+  .hero-title {
+    font-size: 1.05rem;
+    color: var(--blue-accent);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.3px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+ 
+  .hero-desc {
+    font-size: 0.95rem;
+    color: var(--white-dim);
+    max-width: 500px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+ 
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+ 
+  .btn-primary {
+    padding: 0.8rem 2rem;
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.25s ease;
+    border: 1px solid var(--gold);
+  }
+ 
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201,168,76,0.25);
+  }
+ 
+  .btn-outline {
+    padding: 0.8rem 2rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.25s ease;
+  }
+ 
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+ 
+  /* HERO PHOTO */
+  .hero-photo-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.6s forwards;
+  }
+ 
+  .hero-photo-frame {
+    position: relative;
+    width: 340px;
+    height: 420px;
+  }
+ 
+  .hero-photo-frame::before {
+    content: '';
+    position: absolute;
+    top: 18px; right: -18px;
+    width: 100%; height: 100%;
+    border: 2px solid var(--gold);
+    border-radius: 3px;
+    z-index: 0;
+  }
+ 
+  .hero-photo-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,22,40,0.5) 0%, transparent 60%);
+    z-index: 2;
+    border-radius: 3px;
+  }
+ 
+  .hero-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy-light) 100%);
+    border-radius: 3px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+ 
+  .hero-photo-placeholder svg {
+    width: 120px;
+    height: 120px;
+    color: var(--gold);
+    opacity: 0.5;
+  }
+ 
+  .photo-upload-hint {
+    font-size: 0.75rem;
+    color: var(--white-dim);
+    margin-top: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+ 
+  .hero-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+ 
+  .stat-card {
+    text-align: center;
+    padding: 1rem 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    backdrop-filter: blur(8px);
+    flex: 1;
+  }
+ 
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    font-weight: 700;
+    line-height: 1;
+  }
+ 
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--white-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+ 
+  /* SECTION COMMONS */
+  section {
+    padding: 6rem 4rem;
+    position: relative;
+  }
+ 
+  .section-header {
+    margin-bottom: 4rem;
+  }
+ 
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+ 
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: var(--white);
+    font-weight: 700;
+  }
+ 
+  .section-line {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin-top: 1rem;
+  }
+ 
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+ 
+  .about-text p {
+    font-size: 0.95rem;
+    color: var(--white-dim);
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+  }
+ 
+  .about-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+ 
+  .info-item { padding: 0.8rem 0; border-bottom: 1px solid var(--border); }
+  .info-label { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+  .info-value { font-size: 0.9rem; color: var(--white-dim); }
+ 
+  /* EXPERIENCE */
+  .experience-wrap { max-width: 860px; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+ 
+  .exp-item:first-child { padding-top: 0; }
+ 
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--gold);
+    padding-top: 0.2rem;
+    line-height: 1.5;
+  }
+ 
+  .exp-company {
+    font-size: 0.75rem;
+    color: var(--blue-accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+    font-weight: 500;
+  }
+ 
+  .exp-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--white);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+  }
+ 
+  .exp-points { list-style: none; }
+  .exp-points li {
+    font-size: 0.88rem;
+    color: var(--white-dim);
+    padding: 0.3rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+ 
+  .exp-points li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.75rem;
+  }
+ 
+  /* SKILLS */
+  .skills-section { background: var(--navy-mid); }
+ 
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+ 
+  .skill-card {
+    background: rgba(10,22,40,0.6);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+  }
+ 
+  .skill-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-3px); }
+  .skill-card:hover::before { transform: scaleY(1); }
+ 
+  .skill-card-title {
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+ 
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+ 
+  .skill-tag {
+    font-size: 0.78rem;
+    color: var(--white-dim);
+    padding: 0.3rem 0.7rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+ 
+  .skill-tag:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); color: var(--gold); }
+ 
+  .tools-strip {
+    margin-top: 3rem;
+    padding: 1.5rem 2rem;
+    background: rgba(10,22,40,0.5);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+  }
+ 
+  .tools-strip-label {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+ 
+  .tools-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+ 
+  .tool-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--blue-accent);
+    padding: 0.35rem 0.9rem;
+    border: 1px solid rgba(74,158,218,0.3);
+    border-radius: 20px;
+    background: rgba(74,158,218,0.05);
+  }
+ 
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+ 
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(8px);
+  }
+ 
+  .project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.03) 0%, transparent 60%);
+    pointer-events: none;
+  }
+ 
+  .project-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+ 
+  .project-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+  }
+ 
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--white);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+ 
+  .project-desc {
+    font-size: 0.85rem;
+    color: var(--white-dim);
+    line-height: 1.8;
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+ 
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.2rem;
+  }
+ 
+  .tech-badge {
+    font-size: 0.7rem;
+    color: var(--blue-accent);
+    padding: 0.2rem 0.6rem;
+    border: 1px solid rgba(74,158,218,0.25);
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+    background: rgba(74,158,218,0.05);
+  }
+ 
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: gap 0.2s;
+    margin-top: auto;
+  }
+ 
+  .project-link:hover { gap: 0.7rem; }
+ 
+  /* EDUCATION */
+  .edu-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 2.5rem;
+    max-width: 700px;
+    backdrop-filter: blur(8px);
+  }
+ 
+  .edu-degree {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+ 
+  .edu-school {
+    font-size: 0.85rem;
+    color: var(--blue-accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+ 
+  .edu-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+ 
+  .edu-courses { list-style: none; }
+  .edu-courses li {
+    font-size: 0.85rem;
+    color: var(--white-dim);
+    padding: 0.25rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+ 
+  .edu-courses li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--gold);
+    font-size: 0.7rem;
+    top: 0.35rem;
+  }
+ 
+  /* CONTACT */
+  .contact-section { background: var(--navy-mid); }
+ 
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+ 
+  .contact-info p {
+    font-size: 0.95rem;
+    color: var(--white-dim);
+    line-height: 1.9;
+    margin-bottom: 2rem;
+  }
+ 
+  .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+ 
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: rgba(10,22,40,0.5);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+ 
+  .contact-item:hover { border-color: var(--gold); transform: translateX(4px); }
+ 
+  .contact-icon {
+    width: 36px; height: 36px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+ 
+  .contact-item-label { font-size: 0.72rem; color: var(--white-dim); letter-spacing: 1px; text-transform: uppercase; }
+  .contact-item-value { font-size: 0.88rem; color: var(--white); margin-top: 0.1rem; }
+ 
+  /* FOOTER */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+ 
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 1rem;
+  }
+ 
+  .footer-copy {
+    font-size: 0.78rem;
+    color: var(--white-dim);
+    opacity: 0.5;
+  }
+ 
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 0 4rem;
+  }
+ 
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+ 
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+ 
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+ 
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+ 
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--navy-light); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+ 
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+    section { padding: 5rem 2rem; }
+    .hero { grid-template-columns: 1fr; padding: 8rem 2rem 4rem; }
+    .hero-photo-wrap { order: -1; }
+    .hero-photo-frame { width: 240px; height: 300px; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+    .divider { margin: 0 2rem; }
+  }
+ 
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .hero-stats { flex-direction: column; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .about-info { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <div class="profile-container">
-            <img src="profile.jpg" alt="Fahed Sbeihi" class="profile-pic">
+ 
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">FS</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+ 
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <span class="hero-tag">Business Intelligence · Data Analytics</span>
+    <h1>Fahed <span>Sbeihi</span></h1>
+    <p class="hero-title">Data & Automation Specialist · PwC Middle East</p>
+    <p class="hero-desc">
+      Analytical and detail-oriented Business & Data Analyst with hands-on experience transforming complex, multi-source datasets into actionable insights that drive strategic and operational decision-making.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-stats" style="opacity:0; animation: fadeUp 0.8s ease 1s forwards;">
+      <div class="stat-card">
+        <div class="stat-number">9+</div>
+        <div class="stat-label">BI Projects</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4+</div>
+        <div class="stat-label">Years Study</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">PwC</div>
+        <div class="stat-label">Current Role</div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-frame">
+      <div class="hero-photo-placeholder">
+        <!-- Replace the SVG below with an <img> tag pointing to your photo -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+        <span class="photo-upload-hint">Add Your Photo Here</span>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<div class="divider"></div>
+ 
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <span class="section-tag">01 · About</span>
+    <h2 class="section-title">Background</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        I'm a Business Intelligence graduate from Middle East University with a focused track record in data analysis, KPI reporting, and dashboard development. My work sits at the intersection of raw data and real business decisions — taking complex, multi-source datasets and turning them into clarity.
+      </p>
+      <p>
+        Currently at PwC Middle East as a Data & Automation Specialist, I build automated reporting systems and Power BI dashboards that directly support client deliverables across consulting engagements. Prior to that, I've worked with Medtronic, Bank Al-Etihad, and Correlation One | USAID — gaining exposure across commercial analytics, financial tracking, and international data fellowship programs.
+      </p>
+      <p>
+        My technical stack centers on Power BI, Python, SQL, DAX, and Power Automate. I'm driven by the belief that well-designed data products don't just report numbers — they change how organizations operate.
+      </p>
+      <div class="about-info">
+        <div class="info-item">
+          <div class="info-label">Location</div>
+          <div class="info-value">Amman, Jordan</div>
         </div>
-        <h1>Fahed Sbeihi</h1>
-        <h2>Data Analyst</h2>
-        <p>2 Years of Experience in Data Analysis & Business Intelligence</p>
-    </header>
-    
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
+        <div class="info-item">
+          <div class="info-label">Current Role</div>
+          <div class="info-value">PwC Middle East</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Education</div>
+          <div class="info-value">BSc Business Intelligence</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Email</div>
+          <div class="info-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="296f48414c4d76191a69465c5d45464642075a48">[email&#160;protected]</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay: 0.2s;">
+      <!-- Graduation project highlight card -->
+      <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 3px; padding: 2rem; backdrop-filter: blur(8px);">
+        <div class="section-tag" style="margin-bottom: 1rem;">Graduation Project</div>
+        <p style="font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--white); margin-bottom: 1rem; line-height: 1.5;">Audit Risk & Compliance Performance Dashboard</p>
+        <p style="font-size: 0.85rem; color: var(--white-dim); line-height: 1.8; margin-bottom: 1.5rem;">
+          End-to-end BI solution built for the Big 4 audit environment — covering risk scoring, compliance violations, client satisfaction trends, and AI adoption metrics. Integrated Power BI, DAX, Orange Data Mining, and N8n automation.
+        </p>
+        <a href="https://lnkd.in/gAPFhgSt" target="_blank" class="project-link">View Dashboard →</a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<div class="divider"></div>
+ 
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <span class="section-tag">02 · Experience</span>
+    <h2 class="section-title">Professional History</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="experience-wrap">
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-date">Jan 2026 — Present</div>
+        <div class="exp-company">PwC Middle East</div>
+      </div>
+      <div>
+        <div class="exp-role">Data & Automation Specialist · Associate</div>
+        <ul class="exp-points">
+          <li>Translate business requirements into analytical and reporting solutions in collaboration with project managers, clients, and stakeholders.</li>
+          <li>Build automated Power BI dashboards and KPI performance reports to enhance organizational decision-making and business visibility.</li>
+          <li>Implement Microsoft Power Automate workflows to streamline reporting and operational processes.</li>
+          <li>Analyze and manage business data via Salesforce and internal analytics platforms to support client deliverables and BI initiatives.</li>
+          <li>Maintain data accuracy through validation, transformation, and reporting best practices.</li>
         </ul>
-    </nav>
-
-    <main class="container">
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Analytical and detail-oriented Business & Data Analyst with experience in data analysis, business reporting, KPI tracking, and forecasting within data-driven environments. Skilled in analyzing complex, multi-source datasets and translating business needs into actionable insights that support strategic and operational decision-making. Proficient in Power BI, Excel, SQL, and workflow automation to build automated dashboards, performance reports, and analytical models that improve visibility and operational efficiency. Experienced in stakeholder collaboration, requirements analysis, and performance monitoring across Sales, Marketing, Finance, Technology, and Consulting teams. Passionate about leveraging data analytics and business intelligence to drive measurable impact and deliver value in fast-paced, data-driven organizations.</p>
-        </section>
-
-        <section id="projects">
-            <h2>Featured Projects</h2>
-            
-            <div class="project-card">
-                <h3>Audit Risk and Compliance Performance Dashboard</h3>
-                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint, DAX, N8n Automation, Orange Data Mining</p>
-                <p>Graduation project designed to transform raw audit data into actionable insights. Covers audit effectiveness, AI adoption, risk scores, high-risk case identification by firm, client satisfaction trends, compliance violations by industry, and operational KPIs. Demonstrates advanced data modeling, KPI-driven design, and practical insights for risk management and compliance monitoring in Big 4 audit environments.</p>
-                <a href="https://lnkd.in/gAPFhgSt" target="_blank">View Interactive Dashboard</a>
-            </div>
-
-            <div class="project-card">
-                <h3>HR Employee Performance Dashboard</h3>
-                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
-                <p>Interactive dashboard designed to deliver key insights into workforce trends, training effectiveness, and employee demographics. Delivers actionable HR insights including workforce overview, gender distribution, promotion and retrenchment readiness, job satisfaction and performance ratings, experience analysis, and distance-from-office metrics. Supports data-driven HR decision-making with clear action and detail views.</p>
-                <a href="https://lnkd.in/dinU6Csn" target="_blank">View Interactive Dashboard</a>
-            </div>
-
-            <div class="project-card">
-                <h3>HR Data Analysis Dashboard</h3>
-                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
-                <p>Analyzes key HR metrics including gender distribution across the organization, average monthly salary range by pay zones, department-wise employee distribution, and employee type classification. Demonstrates practical skills in data modeling, visualization, and translating raw HR data into meaningful business insights for strategic HR planning.</p>
-                <a href="#" target="_blank">View Dashboard</a>
-            </div>
-
-            <div class="project-card">
-                <h3>HR Statistical Analysis Dashboard</h3>
-                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
-                <p>Provides comprehensive workforce analytics with focus on statistical trends, employee demographics, performance metrics, and departmental insights. Enables HR teams to identify patterns in workforce composition and support strategic workforce planning and resource allocation.</p>
-                <a href="#" target="_blank">View Dashboard</a>
-            </div>
-
-            <div class="project-card">
-                <h3>Loan Portfolio Analysis Dashboard</h3>
-                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
-                <p>Consolidates customer demographics, financial profiles, and lending performance into comprehensive analytical view. Analyzes loan default patterns, customer distribution across states, balance analysis, and employment classification trends across 3,994 clients. Provides 360-degree view of portfolio composition and risk distribution to support portfolio optimization, credit risk management, and customer segmentation strategies.</p>
-                <a href="https://lnkd.in/d2RtkDsb" target="_blank">View Interactive Dashboard</a>
-            </div>
-
-            <div class="project-card">
-                <h3>Financial Analytics Dashboard</h3>
-                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
-                <p>Consolidates customer, card, and transaction data into comprehensive analytical view. Highlights key performance indicators including client growth trends, card type distribution, median credit limits, and technology adoption through chip-enabled cards. Provides 360-degree view of client behavior and financial health to drive growth, manage risk, and identify expansion opportunities.</p>
-                <a href="#" target="_blank">View Dashboard</a>
-            </div>
-
-            <div class="project-card">
-                <h3>Open University Students Performance Dashboard</h3>
-                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
-                <p>Built on real-world Kaggle data, visualizes student performance across modules, assessment types, and presentation periods. Identifies peak engagement periods in 2014B presentation cycle, assessment distribution patterns with CMA as first assessment type, and module-specific trends. Supports academic planning and performance analysis through data-driven insights.</p>
-                <a href="#" target="_blank">View Dashboard</a>
-            </div>
-
-            <div class="project-card">
-                <h3>USA Transaction Dashboard</h3>
-                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
-                <p>Fully interactive dashboard visualizing transactional data across the United States. Displays 70 unique destination states, 91 total units sold, 286K+ customers, and 604K in total sales revenue. Focuses on sales performance, customer behavior, channel comparison, and regional reach to enable data-driven business decisions and identify growth opportunities.</p>
-                <a href="#" target="_blank">View Dashboard</a>
-            </div>
-
-            <div class="project-card">
-                <h3>Walmart Sales Statistics</h3>
-                <p class="tech-stack"><strong>Tech Stack:</strong> Power BI, Python, Power Query, SharePoint</p>
-                <p>Comprehensive analysis of Walmart sales data across regions and product categories. Identifies sales patterns, performance trends, and operational efficiency metrics to support strategic business decisions and optimize sales performance across retail channels.</p>
-                <a href="#" target="_blank">View Dashboard</a>
-            </div>
-        </section>
-
-        <section id="skills">
-            <h2>Skills & Tools</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Data Visualization</h3>
-                    <span class="skill">Power BI</span>
-                </div>
-                <div class="skill-category">
-                    <h3>Data Analysis & Reporting</h3>
-                    <span class="skill">Advanced Excel</span>
-                    <span class="skill">SQL</span>
-                    <span class="skill">DAX</span>
-                </div>
-                <div class="skill-category">
-                    <h3>Automation & Integration</h3>
-                    <span class="skill">Power Automate</span>
-                    <span class="skill">Power Query</span>
-                </div>
-                <div class="skill-category">
-                    <h3>Business Tools</h3>
-                    <span class="skill">Salesforce</span>
-                    <span class="skill">PowerPoint</span>
-                </div>
-                <div class="skill-category">
-                    <h3>Programming</h3>
-                    <span class="skill">Python</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <h2>Get In Touch</h2>
-            <p>I'm always interested in new opportunities and collaborations in data analytics and business intelligence.</p>
-            <p><strong>Email:</strong> fahed_03@outlook.sa</p>
-            <p><strong>GitHub:</strong> <a href="https://github.com/Fahed03" target="_blank">github.com/Fahed03</a></p>
-            <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/fahed-sbeihi" target="_blank">linkedin.com/in/fahed-sbeihi</a></p>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Fahed Sbeihi. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-date">May 2025 — Jan 2026</div>
+        <div class="exp-company">Medtronic</div>
+      </div>
+      <div>
+        <div class="exp-role">Business & Commercial Intern · Remote</div>
+        <ul class="exp-points">
+          <li>Supported commercial analytics and financial tracking across multiple business units.</li>
+          <li>Built progress reports and dashboards using Excel and Power BI to monitor KPIs and project deliverables.</li>
+          <li>Contributed to project coordination and process improvement initiatives across global, remote teams.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-date">Oct 2024 — Mar 2025</div>
+        <div class="exp-company">Correlation One · USAID</div>
+      </div>
+      <div>
+        <div class="exp-role">Advanced Data Analytics Fellow · Remote</div>
+        <ul class="exp-points">
+          <li>Managed analytics projects within an international fellowship program focused on business and revenue insights.</li>
+          <li>Applied Excel, Power BI, and Python for data analysis, forecasting, and performance measurement.</li>
+          <li>Delivered data-driven presentations and dashboards communicating findings to mentors and stakeholders.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-date">Oct 2024 — Dec 2024</div>
+        <div class="exp-company">Bank Al-Etihad Foundation</div>
+      </div>
+      <div>
+        <div class="exp-role">Social Media & Marketing Intern · On-Site</div>
+        <ul class="exp-points">
+          <li>Analyzed marketing campaign performance data to inform strategic decision-making.</li>
+          <li>Created visual dashboards and automated reports in Power BI and Excel for management tracking.</li>
+          <li>Coordinated with marketing and operations teams to monitor KPIs, budgets, and project deliverables.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<div class="divider"></div>
+ 
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="section-header reveal">
+    <span class="section-tag">03 · Skills</span>
+    <h2 class="section-title">Core Competencies</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-card-title">Data Analytics & Visualization</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">DAX</span>
+        <span class="skill-tag">KPI Dashboards</span>
+        <span class="skill-tag">Power Query</span>
+        <span class="skill-tag">Data Storytelling</span>
+        <span class="skill-tag">Excel Advanced</span>
+        <span class="skill-tag">PivotTables</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay: 0.1s;">
+      <div class="skill-card-title">Data Management & Analysis</div>
+      <div class="skill-tags">
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">ETL Processes</span>
+        <span class="skill-tag">Data Cleaning</span>
+        <span class="skill-tag">Data Modeling</span>
+        <span class="skill-tag">Data Integration</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay: 0.2s;">
+      <div class="skill-card-title">Business Analytics & Reporting</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Forecast vs. Actual</span>
+        <span class="skill-tag">Budget Analysis</span>
+        <span class="skill-tag">ROI Analysis</span>
+        <span class="skill-tag">Revenue Tracking</span>
+        <span class="skill-tag">Performance Optimization</span>
+        <span class="skill-tag">KPI Monitoring</span>
+      </div>
+    </div>
+    <div class="skill-card reveal" style="transition-delay: 0.3s;">
+      <div class="skill-card-title">Professional Skills</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Stakeholder Collaboration</span>
+        <span class="skill-tag">Requirements Analysis</span>
+        <span class="skill-tag">Analytical Thinking</span>
+        <span class="skill-tag">Problem Solving</span>
+        <span class="skill-tag">Attention to Detail</span>
+        <span class="skill-tag">Adaptability</span>
+      </div>
+    </div>
+  </div>
+  <div class="tools-strip reveal" style="margin-top: 2rem;">
+    <div class="tools-strip-label">Technical Tools</div>
+    <div class="tools-list">
+      <span class="tool-pill">Power BI</span>
+      <span class="tool-pill">Excel</span>
+      <span class="tool-pill">SQL</span>
+      <span class="tool-pill">Python</span>
+      <span class="tool-pill">DAX</span>
+      <span class="tool-pill">Power Query</span>
+      <span class="tool-pill">Power Automate</span>
+      <span class="tool-pill">Salesforce</span>
+      <span class="tool-pill">Azure</span>
+      <span class="tool-pill">ETL</span>
+      <span class="tool-pill">SharePoint</span>
+      <span class="tool-pill">N8n</span>
+      <span class="tool-pill">Orange Data Mining</span>
+      <span class="tool-pill">SaaS</span>
+      <span class="tool-pill">Data Modeling</span>
+    </div>
+  </div>
+</section>
+ 
+<div class="divider"></div>
+ 
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-tag">04 · Projects</span>
+    <h2 class="section-title">Portfolio</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+ 
+    <div class="project-card reveal">
+      <div class="project-num">01</div>
+      <div class="project-title">Audit Risk & Compliance Performance Dashboard</div>
+      <p class="project-desc">
+        Graduation project simulating an enterprise-grade BI environment for the Big 4 audit sector. Covers risk scoring by firm, compliance violations by industry, AI adoption metrics, client satisfaction trends, and revenue KPIs — delivering a complete picture of audit effectiveness and operational performance.
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">Power BI</span>
+        <span class="tech-badge">DAX</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">N8n</span>
+        <span class="tech-badge">Orange Data Mining</span>
+        <span class="tech-badge">SharePoint</span>
+      </div>
+      <a href="https://lnkd.in/gAPFhgSt" target="_blank" class="project-link">View Dashboard →</a>
+    </div>
+ 
+    <div class="project-card reveal" style="transition-delay: 0.1s;">
+      <div class="project-num">02</div>
+      <div class="project-title">HR Analytics Dashboard</div>
+      <p class="project-desc">
+        Consolidates workforce data into a structured, decision-ready view — covering gender distribution, promotion and retrenchment readiness, job satisfaction, performance ratings, overtime patterns, and distance-from-office analysis. Built with distinct Action and Details views to support targeted HR decision-making.
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">Power BI</span>
+        <span class="tech-badge">Power Query</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">SharePoint</span>
+      </div>
+      <a href="https://lnkd.in/dw6vrqq5" target="_blank" class="project-link">View Dashboard →</a>
+    </div>
+ 
+    <div class="project-card reveal" style="transition-delay: 0.15s;">
+      <div class="project-num">03</div>
+      <div class="project-title">HR Employee Performance Dashboard</div>
+      <p class="project-desc">
+        Interactive dashboard built to support data-driven HR strategy — surfacing workforce trends, training effectiveness, and employee demographics. Designed to improve visibility into performance indicators and enable informed decisions in workforce management.
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">Power BI</span>
+        <span class="tech-badge">Power Query</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">SharePoint</span>
+      </div>
+      <a href="https://lnkd.in/dinU6Csn" target="_blank" class="project-link">View Dashboard →</a>
+    </div>
+ 
+    <div class="project-card reveal" style="transition-delay: 0.2s;">
+      <div class="project-num">04</div>
+      <div class="project-title">HR Statistical Analysis Dashboard</div>
+      <p class="project-desc">
+        Focuses on statistical HR metrics including gender distribution, average monthly salary ranges by pay zone, department-level employee distribution, and employee type classification as a proxy for qualification levels. Translates raw HR data into business-ready insights for organizational planning.
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">Power BI</span>
+        <span class="tech-badge">Power Query</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">SharePoint</span>
+      </div>
+    </div>
+ 
+    <div class="project-card reveal" style="transition-delay: 0.25s;">
+      <div class="project-num">05</div>
+      <div class="project-title">Loan Portfolio Analysis Dashboard</div>
+      <p class="project-desc">
+        360-degree view of a 3,994-client lending portfolio, combining customer demographics, geographic mapping, and financial metrics. Highlights loan default patterns, regional concentration, employment-based risk segmentation, and balance distribution — enabling both credit risk management and targeted engagement strategies.
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">Power BI</span>
+        <span class="tech-badge">Power Query</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">SharePoint</span>
+      </div>
+      <a href="https://lnkd.in/d2RtkDsb" target="_blank" class="project-link">View Dashboard →</a>
+    </div>
+ 
+    <div class="project-card reveal" style="transition-delay: 0.3s;">
+      <div class="project-num">06</div>
+      <div class="project-title">Financial Analytics Dashboard</div>
+      <p class="project-desc">
+        Consolidates customer, card, and transaction data into a single interactive view. Highlights client growth over time, card type distribution, median credit limits, and technology adoption via chip-enabled cards — providing strategic insight into client behavior, product mix, and financial health.
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">Power BI</span>
+        <span class="tech-badge">Power Query</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">SharePoint</span>
+      </div>
+    </div>
+ 
+    <div class="project-card reveal" style="transition-delay: 0.35s;">
+      <div class="project-num">07</div>
+      <div class="project-title">Open University Students Performance Dashboard</div>
+      <p class="project-desc">
+        Built on real-world Kaggle data, this dashboard maps student performance across modules, assessment types, and presentation periods. Key findings: the 2014B period recorded peak student activity; module FFF showed the highest engagement overall; assessment weight is balanced between Exams and TMAs, with CMAs holding the smallest share.
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">Power BI</span>
+        <span class="tech-badge">Power Query</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">SharePoint</span>
+      </div>
+    </div>
+ 
+    <div class="project-card reveal" style="transition-delay: 0.4s;">
+      <div class="project-num">08</div>
+      <div class="project-title">USA Transactions Dashboard</div>
+      <p class="project-desc">
+        National-scale transactional dashboard tracking $604K in total sales across 286K+ customers and 70 destination states. Surfaces sales performance, customer behavior patterns, channel comparison, and regional reach — structured to tell a business story rather than simply display numbers.
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">Power BI</span>
+        <span class="tech-badge">Power Query</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">SharePoint</span>
+      </div>
+    </div>
+ 
+    <div class="project-card reveal" style="transition-delay: 0.45s;">
+      <div class="project-num">09</div>
+      <div class="project-title">Walmart Sales Statistics Dashboard</div>
+      <p class="project-desc">
+        Sales analytics dashboard built on Walmart transactional data, visualizing performance trends, product category breakdowns, and regional distribution. Designed to surface actionable patterns for retail strategy and operational planning.
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">Power BI</span>
+        <span class="tech-badge">Power Query</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">SharePoint</span>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<div class="divider"></div>
+ 
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal">
+    <span class="section-tag">05 · Education</span>
+    <h2 class="section-title">Academic Background</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-card reveal">
+    <div class="edu-degree">Bachelor of Business Intelligence</div>
+    <div class="edu-school">Middle East University · Amman, Jordan</div>
+    <div class="edu-period">2021 — 2025</div>
+    <ul class="edu-courses">
+      <li>Business Analytics, Forecasting, Strategic Planning, Digital Transformation</li>
+      <li>Designed interactive dashboards and data visualizations using Power BI and Tableau</li>
+      <li>Conducted SQL-based case studies to extract, transform, and analyze real-world datasets</li>
+    </ul>
+  </div>
+</section>
+ 
+<div class="divider"></div>
+ 
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-header reveal">
+    <span class="section-tag">06 · Contact</span>
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <p>
+        Whether you're looking to discuss a data project, explore collaboration opportunities, or simply connect — I'm open to conversations that sit at the intersection of business and analytics.
+      </p>
+      <div class="contact-items">
+        <a href="/cdn-cgi/l/email-protection#d395b2bbb6b78ce3e093bca6a7bfbcbcb8fda0b2" class="contact-item">
+          <div class="contact-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value"><span class="__cf_email__" data-cfemail="5b1d3a333e3f046b681b342e2f3734343075283a">[email&#160;protected]</span></div>
+          </div>
+        </a>
+        <a href="tel:+962799062308" class="contact-item">
+          <div class="contact-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Phone</div>
+            <div class="contact-item-value">+962 799 062 308</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com" target="_blank" class="contact-item">
+          <div class="contact-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">LinkedIn</div>
+            <div class="contact-item-value">linkedin.com/in/fahed-sbeihi</div>
+          </div>
+        </a>
+        <div class="contact-item" style="cursor: default;">
+          <div class="contact-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-value">Amman, Jordan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay: 0.2s;">
+      <div style="background: rgba(10,22,40,0.5); border: 1px solid var(--border); border-radius: 3px; padding: 2.5rem;">
+        <div class="section-tag" style="margin-bottom: 1.5rem;">Open to Opportunities</div>
+        <p style="font-size: 0.9rem; color: var(--white-dim); line-height: 1.9; margin-bottom: 1.5rem;">
+          Currently working at PwC Middle East and selectively open to collaborations, freelance BI projects, and professional connections in the data and business intelligence space.
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+          <div style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.85rem; color: var(--white-dim);">
+            <span style="color: var(--gold); font-size: 1rem;">✓</span> Power BI Dashboard Development
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.85rem; color: var(--white-dim);">
+            <span style="color: var(--gold); font-size: 1rem;">✓</span> Data Analysis & Reporting
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.85rem; color: var(--white-dim);">
+            <span style="color: var(--gold); font-size: 1rem;">✓</span> Workflow Automation
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.85rem; color: var(--white-dim);">
+            <span style="color: var(--gold); font-size: 1rem;">✓</span> BI Strategy Consulting
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Fahed Sbeihi</div>
+  <div class="footer-copy">© 2026 · Data & Business Intelligence Analyst · Amman, Jordan</div>
+</footer>
+ 
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargi
